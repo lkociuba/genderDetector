@@ -14,24 +14,20 @@ public class SimpleAlgorithm {
             throw new NullPointerException("Null value given!");
         }
 
-        String result;
         var firstTokenOfName = tokenedName[0];
 
-        for (String fameleToken : femaleTokenList) {
-            if (fameleToken.equals(firstTokenOfName)) {
-                result = "FEMALE";
-                return result;
+        for (String femaleToken : femaleTokenList) {
+            if (femaleToken.equals(firstTokenOfName)) {
+                return "FEMALE";
             }
         }
 
         for (String maleToken : maleTokenList) {
             if (maleToken.equals(firstTokenOfName)) {
-                result = "MALE";
-                return result;
+                return "MALE";
             }
         }
 
-        result = "INCONCLUSIVE";
-        return result;
+        return "INCONCLUSIVE";
     }
 }
