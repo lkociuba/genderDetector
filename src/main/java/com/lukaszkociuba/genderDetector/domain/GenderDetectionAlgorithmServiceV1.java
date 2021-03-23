@@ -16,7 +16,8 @@ public class GenderDetectionAlgorithmServiceV1 implements GenderDetectionAlgorit
         GenderDetectionAlgorithmFactory genderDetectionAlgorithmFactory = new GenderDetectionAlgorithmFactory();
         GenderDetectionAlgorithm algorithm = genderDetectionAlgorithmFactory.genderDetectionAlgorithm(givenAlgorithmType);
 
-        return algorithm.detectGender(name, femaleTokes, maleTokens);
+        //return algorithm.detectGender(name, femaleTokes, maleTokens);
+        return null;
     }
 
     private GenderDetectionAlgorithmType getAlgorithmType(String algorithmType) throws Exception {

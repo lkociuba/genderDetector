@@ -22,7 +22,7 @@ class FirstTokenGenderDetectionAlgorithmTest {
     void detectGender_name1_returnMale() {
         var result = firstTokenGenderDetectionAlgorithm.detectGender(name1, femaleTokens, maleTokens);
 
-        assertThat(result, is("MALE"));
+        assertThat(result, is(GenderDetectionAlgorithmResult.MALE));
     }
 
     @Test
@@ -30,7 +30,7 @@ class FirstTokenGenderDetectionAlgorithmTest {
         var name2 = "Anna Zgidniew Gertruda";
         var result = firstTokenGenderDetectionAlgorithm.detectGender(name2, femaleTokens, maleTokens);
 
-        assertThat(result, is("FEMALE"));
+        assertThat(result, is(GenderDetectionAlgorithmResult.FEMALE));
     }
 
     @Test
@@ -38,7 +38,7 @@ class FirstTokenGenderDetectionAlgorithmTest {
         var name3 = "Krzysztof Bogusław";
         var result = firstTokenGenderDetectionAlgorithm.detectGender(name3, femaleTokens, maleTokens);
 
-        assertThat(result, is("INCONCLUSIVE"));
+        assertThat(result, is(GenderDetectionAlgorithmResult.INCONCLUSIVE));
     }
 
     @Test

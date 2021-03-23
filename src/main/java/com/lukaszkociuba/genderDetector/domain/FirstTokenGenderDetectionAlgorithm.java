@@ -5,7 +5,7 @@ import java.util.List;
 public class FirstTokenGenderDetectionAlgorithm implements GenderDetectionAlgorithm {
 
     @Override
-    public String detectGender(String name, List<String> femaleTokens, List<String> maleTokens) {
+    public GenderDetectionAlgorithmResult detectGender(String name, List<String> femaleTokens, List<String> maleTokens) {
         if (name == null || femaleTokens == null || maleTokens == null) {
             throw new NullPointerException("Null value given!");
         }
@@ -16,16 +16,16 @@ public class FirstTokenGenderDetectionAlgorithm implements GenderDetectionAlgori
 
         for (var femaleToken : femaleTokens) {
             if (femaleToken.equals(firstTokenOfName)) {
-                return "FEMALE";
+                return GenderDetectionAlgorithmResult.FEMALE;
             }
         }
 
         for (var maleToken : maleTokens) {
             if (maleToken.equals(firstTokenOfName)) {
-                return "MALE";
+                return GenderDetectionAlgorithmResult.MALE;
             }
         }
 
-        return "INCONCLUSIVE";
+        return GenderDetectionAlgorithmResult.INCONCLUSIVE;
     }
 }

@@ -17,7 +17,7 @@ public class AllTokenGenderDetectionAlgorithm implements GenderDetectionAlgorith
     }
 
     @Override
-    public String detectGender(String name, List<String> femaleTokens, List<String> maleTokens) {
+    public GenderDetectionAlgorithmResult detectGender(String name, List<String> femaleTokens, List<String> maleTokens) {
         if (name == null || femaleTokens == null || maleTokens == null) {
             throw new NullPointerException("Null value given!");
         }
@@ -29,11 +29,11 @@ public class AllTokenGenderDetectionAlgorithm implements GenderDetectionAlgorith
         int countMaleTokens = countEqualTokens(tokenedName, maleTokens);
 
         if (countFemaleTokens != 0 && countFemaleTokens > countMaleTokens) {
-            return "FEMALE";
+            return GenderDetectionAlgorithmResult.FEMALE;
         } else if (countMaleTokens != 0 && countMaleTokens > countFemaleTokens) {
-            return "MALE";
+            return GenderDetectionAlgorithmResult.MALE;
         } else {
-            return "INCONCLUSIVE";
+            return GenderDetectionAlgorithmResult.INCONCLUSIVE;
         }
     }
 }
