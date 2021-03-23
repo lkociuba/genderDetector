@@ -22,7 +22,7 @@ public class AllTokenGenderDetectionAlgorithm implements GenderDetectionAlgorith
             throw new NullPointerException("Null value given!");
         }
 
-        NameToTokenConverter nameToTokenConverter = (name1 -> name1.split("\\s"));
+        GenderDetectionAlgorithmNameToTokenConverter nameToTokenConverter = (name1 -> name1.split("\\s"));
         var tokenedName = nameToTokenConverter.splitNameIntoTokens(name);
 
         int countFemaleTokens = countEqualTokens(tokenedName, femaleTokens);

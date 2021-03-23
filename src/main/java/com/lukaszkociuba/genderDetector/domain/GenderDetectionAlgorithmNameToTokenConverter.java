@@ -1,7 +1,7 @@
 package com.lukaszkociuba.genderDetector.domain;
 
 @FunctionalInterface
-public interface NameToTokenConverter {
+public interface GenderDetectionAlgorithmNameToTokenConverter {
 
     String[] splitNameIntoTokens(String name);
 }

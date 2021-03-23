@@ -4,7 +4,7 @@ public class GenderDetectorImpl implements GenderDetector {
     private SimpleAlgorithm simpleAlgorithm = new SimpleAlgorithm();
     private AdvancedAlgorithm advancedAlgorithm = new AdvancedAlgorithm();
 
-    private NameToTokenConverter nameToTokenConverter = (name -> name.split("\\s"));
+    private GenderDetectionAlgorithmNameToTokenConverter genderDetectionAlgorithmNameToTokenConverter = (name -> name.split("\\s"));
     private String[] tokenedName;
 
     @Override
@@ -13,7 +13,7 @@ public class GenderDetectorImpl implements GenderDetector {
             throw new NullPointerException("Null value given!");
         }
 
-        tokenedName = nameToTokenConverter.splitNameIntoTokens(name);
+        tokenedName = genderDetectionAlgorithmNameToTokenConverter.splitNameIntoTokens(name);
 
         return simpleAlgorithm.predictGenderByFirstTokenOnly(tokenedName);
     }
@@ -24,7 +24,7 @@ public class GenderDetectorImpl implements GenderDetector {
             throw new NullPointerException("Null value given!");
         }
 
-        tokenedName = nameToTokenConverter.splitNameIntoTokens(name);
+        tokenedName = genderDetectionAlgorithmNameToTokenConverter.splitNameIntoTokens(name);
 
         return advancedAlgorithm.predictGenderByAllTokens(tokenedName);
     }

@@ -10,7 +10,7 @@ public class FirstTokenGenderDetectionAlgorithm implements GenderDetectionAlgori
             throw new NullPointerException("Null value given!");
         }
 
-        NameToTokenConverter nameToTokenConverter = (name1 -> name1.split("\\s"));
+        GenderDetectionAlgorithmNameToTokenConverter nameToTokenConverter = (name1 -> name1.split("\\s"));
         var tokenedName = nameToTokenConverter.splitNameIntoTokens(name);
         var firstTokenOfName = tokenedName[0];
 
