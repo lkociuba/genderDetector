@@ -16,8 +16,8 @@ public class GenderDetectionAlgorithmServiceV1 implements GenderDetectionAlgorit
         GenderDetectionAlgorithmFactory genderDetectionAlgorithmFactory = new GenderDetectionAlgorithmFactory();
         GenderDetectionAlgorithm algorithm = genderDetectionAlgorithmFactory.genderDetectionAlgorithm(givenAlgorithmType);
 
-        //return algorithm.detectGender(name, femaleTokes, maleTokens);
-        return null;
+        var result = algorithm.detectGender(name, femaleTokes, maleTokens);
+        return this.convertAlgorithmResultToString(result);
     }
 
     private GenderDetectionAlgorithmType getAlgorithmType(String algorithmType) throws Exception {
@@ -30,6 +30,22 @@ public class GenderDetectionAlgorithmServiceV1 implements GenderDetectionAlgorit
 
             default:
                 throw new Exception("Invalid algorithm name given!");
+        }
+    }
+
+    private String convertAlgorithmResultToString (GenderDetectionAlgorithmResult algorithmResult) throws Exception {
+        switch (algorithmResult){
+            case FEMALE:
+                return "FEMALE";
+
+            case MALE:
+                return "MALE";
+
+            case INCONCLUSIVE:
+                return "INCONCLUSIVE";
+
+            default:
+                throw new Exception("Invalid algorithm result given!");
         }
     }
 
