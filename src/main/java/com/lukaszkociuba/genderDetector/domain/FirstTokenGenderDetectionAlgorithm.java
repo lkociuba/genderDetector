@@ -6,7 +6,7 @@ public class FirstTokenGenderDetectionAlgorithm implements GenderDetectionAlgori
 
     @Override
     public String detectGender(String name, List<String> femaleTokens, List<String> maleTokens) {
-        if (name == null || femaleTokens == null || maleTokens == null){
+        if (name == null || femaleTokens == null || maleTokens == null) {
             throw new NullPointerException("Null value given!");
         }
 
@@ -14,14 +14,14 @@ public class FirstTokenGenderDetectionAlgorithm implements GenderDetectionAlgori
         var tokenedName = nameToTokenConverter.splitNameIntoTokens(name);
         var firstTokenOfName = tokenedName[0];
 
-        for (var femaleToken: femaleTokens){
-            if (femaleToken.equals(firstTokenOfName)){
+        for (var femaleToken : femaleTokens) {
+            if (femaleToken.equals(firstTokenOfName)) {
                 return "FEMALE";
             }
         }
 
-        for (var maleToken: maleTokens){
-            if (maleToken.equals(firstTokenOfName)){
+        for (var maleToken : maleTokens) {
+            if (maleToken.equals(firstTokenOfName)) {
                 return "MALE";
             }
         }
