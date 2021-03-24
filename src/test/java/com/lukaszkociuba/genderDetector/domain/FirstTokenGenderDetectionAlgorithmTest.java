@@ -91,7 +91,7 @@ class FirstTokenGenderDetectionAlgorithmTest {
     }
 
     @Test
-    void shouldInconclusiveGenderFromEmptyName() {
+    void shouldRuntimeExceptionFromEmptyName() {
         var name = "";
 
         assertThrows(RuntimeException.class, () ->
@@ -99,7 +99,7 @@ class FirstTokenGenderDetectionAlgorithmTest {
     }
 
     @Test
-    void shouldInconclusiveGenderFromSpaceName() {
+    void shouldRuntimeExceptionFromSpaceName() {
         var name = " ";
 
         assertThrows(RuntimeException.class, () ->
