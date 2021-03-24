@@ -128,4 +128,41 @@ class FirstTokenGenderDetectionAlgorithmTest {
         assertThrows(NullPointerException.class, () ->
                 firstTokenGenderDetectionAlgorithm.detectGender(name, femaleTokens, null));
     }
+
+    @Test
+    void shouldFemaleGenderFromNamesWithFirstFemaleNameAndIrregularSpaces() {
+        var name = "Anna    Jan    Olaf";
+
+        var result = firstTokenGenderDetectionAlgorithm.detectGender(name, femaleTokens, maleTokens);
+
+        assertThat(result, is(GenderDetectionAlgorithmResult.FEMALE));
+    }
+
+    @Test
+    void shouldMaleGenderFromNamesWithFirstMaleNameAndIrregularSpaces() {
+        var name = "Jan    Anna     Olaf";
+
+        var result = firstTokenGenderDetectionAlgorithm.detectGender(name, femaleTokens, maleTokens);
+
+        assertThat(result, is(GenderDetectionAlgorithmResult.MALE));
+    }
+
+    @Test
+    void shouldInconclusiveGenderFromNamesWithFirstIncorrectFemaleNameAndIrregularSpaces() {
+        var name = "Julia    Anna    Olaf";
+
+        var result = firstTokenGenderDetectionAlgorithm.detectGender(name, femaleTokens, maleTokens);
+
+        assertThat(result, is(GenderDetectionAlgorithmResult.INCONCLUSIVE));
+    }
+
+    @Test
+    void shouldInconclusiveGenderFromNamesWithFirstIncorrectMaleNameAndIrregularSpaces() {
+        var name = "Krzysztof Anna      Olaf";
+
+        var result = firstTokenGenderDetectionAlgorithm.detectGender(name, femaleTokens, maleTokens);
+
+        assertThat(result, is(GenderDetectionAlgorithmResult.INCONCLUSIVE));
+    }
+
 }

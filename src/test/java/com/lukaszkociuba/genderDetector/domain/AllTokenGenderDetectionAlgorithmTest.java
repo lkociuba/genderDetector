@@ -135,4 +135,31 @@ class AllTokenGenderDetectionAlgorithmTest {
         assertThrows(NullPointerException.class, () ->
                 allTokenGenderDetectionAlgorithm.detectGender(name, femaleTokens, null));
     }
+
+    @Test
+    void shouldFemaleGenderFromNamesWithFemaleMajorityAndIrregularSpaces() {
+        var name = "Anna      Zgidniew        Gertruda";
+
+        var result = allTokenGenderDetectionAlgorithm.detectGender(name, femaleTokens, maleTokens);
+
+        assertThat(result, is(GenderDetectionAlgorithmResult.FEMALE));
+    }
+
+    @Test
+    void shouldMaleGenderFromNamesWithMaleMajorityAndIrregularSpaces() {
+        var name = "Anna      Olaf      Jan";
+
+        var result = allTokenGenderDetectionAlgorithm.detectGender(name, femaleTokens, maleTokens);
+
+        assertThat(result, is(GenderDetectionAlgorithmResult.MALE));
+    }
+
+    @Test
+    void shouldInconclusiveGenderFromNamesWithEqualsMaleAndFemaleAndIrregularSpaces() {
+        var name = "Anna       Olaf  Jan Maria";
+
+        var result = allTokenGenderDetectionAlgorithm.detectGender(name, femaleTokens, maleTokens);
+
+        assertThat(result, is(GenderDetectionAlgorithmResult.INCONCLUSIVE));
+    }
 }

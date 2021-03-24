@@ -4,18 +4,13 @@ import java.util.List;
 
 public class FirstTokenGenderDetectionAlgorithm implements GenderDetectionAlgorithm {
 
+    private AlgorithmCheckVariablesAndTransformName algorithmCheckVariablesAndTransformName =
+            new AlgorithmCheckVariablesAndTransformName();
+
     @Override
     public GenderDetectionAlgorithmResult detectGender(String name, List<String> femaleTokens, List<String> maleTokens) {
-        if (name == null || femaleTokens == null || maleTokens == null) {
-            throw new NullPointerException("Null value given!");
-        }
-
-        if (name.equals("") || name.equals(" ")) {
-            throw new RuntimeException("Empty name given!");
-        }
-
-        GenderDetectionAlgorithmNameToTokenConverter nameToTokenConverter = (name1 -> name1.split("\\s"));
-        var tokenedName = nameToTokenConverter.splitNameIntoTokens(name);
+        var tokenedName = algorithmCheckVariablesAndTransformName
+                .checkVariablesAndTransformName(name, femaleTokens, maleTokens);
         var firstTokenOfName = tokenedName[0];
 
         for (var femaleToken : femaleTokens) {
