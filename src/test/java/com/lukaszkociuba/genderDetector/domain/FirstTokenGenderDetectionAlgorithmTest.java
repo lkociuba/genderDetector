@@ -12,50 +12,120 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 class FirstTokenGenderDetectionAlgorithmTest {
 
-    private FirstTokenGenderDetectionAlgorithm firstTokenGenderDetectionAlgorithm = new FirstTokenGenderDetectionAlgorithm();
+    private FirstTokenGenderDetectionAlgorithm firstTokenGenderDetectionAlgorithm =
+            new FirstTokenGenderDetectionAlgorithm();
 
-    private final String name1 = "Jan Maria Rokita";
     private final List<String> femaleTokens = new ArrayList<>(Arrays.asList("Maria", "Anna", "Gertruda"));
     private final List<String> maleTokens = new ArrayList<>(Arrays.asList("Jan", "Andrzej", "Olaf"));
 
     @Test
-    void detectGender_name1_returnMale() {
-        var result = firstTokenGenderDetectionAlgorithm.detectGender(name1, femaleTokens, maleTokens);
+    void shouldFemaleGenderFromFemaleName() {
+        var name = "Anna";
 
-        assertThat(result, is(GenderDetectionAlgorithmResult.MALE));
-    }
-
-    @Test
-    void detectGender_name2_returnMale() {
-        var name2 = "Anna Zgidniew Gertruda";
-        var result = firstTokenGenderDetectionAlgorithm.detectGender(name2, femaleTokens, maleTokens);
+        var result = firstTokenGenderDetectionAlgorithm.detectGender(name, femaleTokens, maleTokens);
 
         assertThat(result, is(GenderDetectionAlgorithmResult.FEMALE));
     }
 
     @Test
-    void detectGender_name3_returnInconclusive() {
-        var name3 = "Krzysztof Bogusław";
-        var result = firstTokenGenderDetectionAlgorithm.detectGender(name3, femaleTokens, maleTokens);
+    void shouldMaleGenderFromMaleName() {
+        var name = "Jan";
+
+        var result = firstTokenGenderDetectionAlgorithm.detectGender(name, femaleTokens, maleTokens);
+
+        assertThat(result, is(GenderDetectionAlgorithmResult.MALE));
+    }
+
+    @Test
+    void shouldInconclusiveGenderFromIncorrectFemaleName() {
+        var name = "Julia";
+
+        var result = firstTokenGenderDetectionAlgorithm.detectGender(name, femaleTokens, maleTokens);
 
         assertThat(result, is(GenderDetectionAlgorithmResult.INCONCLUSIVE));
     }
 
     @Test
-    void detectGender_nullName_returnNullPointerException() {
+    void shouldInconclusiveGenderFromIncorrectMaleName() {
+        var name = "Krzysztof";
+
+        var result = firstTokenGenderDetectionAlgorithm.detectGender(name, femaleTokens, maleTokens);
+
+        assertThat(result, is(GenderDetectionAlgorithmResult.INCONCLUSIVE));
+    }
+
+    @Test
+    void shouldFemaleGenderFromNamesWithFirstFemaleName() {
+        var name = "Anna Jan Olaf";
+
+        var result = firstTokenGenderDetectionAlgorithm.detectGender(name, femaleTokens, maleTokens);
+
+        assertThat(result, is(GenderDetectionAlgorithmResult.FEMALE));
+    }
+
+    @Test
+    void shouldMaleGenderFromNamesWithFirstMaleName() {
+        var name = "Jan Anna Olaf";
+
+        var result = firstTokenGenderDetectionAlgorithm.detectGender(name, femaleTokens, maleTokens);
+
+        assertThat(result, is(GenderDetectionAlgorithmResult.MALE));
+    }
+
+    @Test
+    void shouldInconclusiveGenderFromNamesWithFirstIncorrectFemaleName() {
+        var name = "Julia Anna Olaf";
+
+        var result = firstTokenGenderDetectionAlgorithm.detectGender(name, femaleTokens, maleTokens);
+
+        assertThat(result, is(GenderDetectionAlgorithmResult.INCONCLUSIVE));
+    }
+
+    @Test
+    void shouldInconclusiveGenderFromNamesWithFirstIncorrectMaleName() {
+        var name = "Krzysztof Anna Olaf";
+
+        var result = firstTokenGenderDetectionAlgorithm.detectGender(name, femaleTokens, maleTokens);
+
+        assertThat(result, is(GenderDetectionAlgorithmResult.INCONCLUSIVE));
+    }
+
+    @Test
+    void shouldInconclusiveGenderFromEmptyName() {
+        var name = "";
+
+        assertThrows(RuntimeException.class, () ->
+                firstTokenGenderDetectionAlgorithm.detectGender(name, femaleTokens, maleTokens));
+    }
+
+    @Test
+    void shouldInconclusiveGenderFromSpaceName() {
+        var name = " ";
+
+        assertThrows(RuntimeException.class, () ->
+                firstTokenGenderDetectionAlgorithm.detectGender(name, femaleTokens, maleTokens));
+    }
+
+
+    @Test
+    void shouldNullPointerExceptionFromNullName() {
         assertThrows(NullPointerException.class, () ->
                 firstTokenGenderDetectionAlgorithm.detectGender(null, femaleTokens, maleTokens));
     }
 
     @Test
-    void detectGender_nullFemaleTokens_returnNullPointerException() {
+    void shouldNullPointerExceptionFromNullFemaleTokens() {
+        var name = "Jan";
+
         assertThrows(NullPointerException.class, () ->
-                firstTokenGenderDetectionAlgorithm.detectGender(name1, null, maleTokens));
+                firstTokenGenderDetectionAlgorithm.detectGender(name, null, maleTokens));
     }
 
     @Test
-    void detectGender_nullMaleTokens_returnNullPointerException() {
+    void shouldNullPointerExceptionFromNullMaleTokens() {
+        var name = "Jan";
+
         assertThrows(NullPointerException.class, () ->
-                firstTokenGenderDetectionAlgorithm.detectGender(name1, femaleTokens, null));
+                firstTokenGenderDetectionAlgorithm.detectGender(name, femaleTokens, null));
     }
 }
