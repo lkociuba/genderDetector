@@ -11,22 +11,22 @@ class GenderDetectionAlgorithmFactoryTest {
     private GenderDetectionAlgorithmFactory genderDetectionAlgorithmFactory = new GenderDetectionAlgorithmFactory();
 
     @Test
-    void genderDetectionAlgorithm_firstToken_resultNewInstanceOfFirstTokenGenderDetectionAlgorithmFactory() throws Exception {
-        var result = genderDetectionAlgorithmFactory.genderDetectionAlgorithm(firstToken);
+    void getGenderDetectionAlgorithm_firstToken_resultNewInstanceOfFirstTokenGenderDetectionAlgorithmFactory() throws Exception {
+        var result = genderDetectionAlgorithmFactory.getGenderDetectionAlgorithm(firstToken);
 
         assertTrue(result instanceof FirstTokenGenderDetectionAlgorithm);
     }
 
     @Test
-    void genderDetectionAlgorithm_allTokens_resultNewInstanceOfAllTokenGenderDetectionAlgorithmFactory() throws Exception {
-        var result = genderDetectionAlgorithmFactory.genderDetectionAlgorithm(allTokens);
+    void getGenderDetectionAlgorithm_allTokens_resultNewInstanceOfAllTokenGenderDetectionAlgorithmFactory() throws Exception {
+        var result = genderDetectionAlgorithmFactory.getGenderDetectionAlgorithm(allTokens);
 
         assertTrue(result instanceof AllTokenGenderDetectionAlgorithm);
     }
 
     @Test
-    void genderDetectionAlgorithm_null_resultException() {
+    void getGenderDetectionAlgorithm_null_resultException() {
         assertThrows(Exception.class, () ->
-                genderDetectionAlgorithmFactory.genderDetectionAlgorithm(null));
+                genderDetectionAlgorithmFactory.getGenderDetectionAlgorithm(null));
     }
 }

@@ -2,7 +2,7 @@ package com.lukaszkociuba.genderDetector.domain;
 
 public class GenderDetectionAlgorithmFactory {
 
-    public GenderDetectionAlgorithm genderDetectionAlgorithm(GenderDetectionAlgorithmType algorithmType) throws Exception {
+    public GenderDetectionAlgorithm getGenderDetectionAlgorithm(GenderDetectionAlgorithmType algorithmType) throws Exception {
         switch (algorithmType) {
             case FIRST_TOKEN:
                 return new FirstTokenGenderDetectionAlgorithm();

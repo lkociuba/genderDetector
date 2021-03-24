@@ -14,7 +14,7 @@ public class GenderDetectionAlgorithmServiceV1 implements GenderDetectionAlgorit
         var givenAlgorithmType = this.getAlgorithmType(algorithmType);
 
         GenderDetectionAlgorithmFactory genderDetectionAlgorithmFactory = new GenderDetectionAlgorithmFactory();
-        GenderDetectionAlgorithm algorithm = genderDetectionAlgorithmFactory.genderDetectionAlgorithm(givenAlgorithmType);
+        GenderDetectionAlgorithm algorithm = genderDetectionAlgorithmFactory.getGenderDetectionAlgorithm(givenAlgorithmType);
 
         var result = algorithm.detectGender(name, femaleTokes, maleTokens);
         return this.convertAlgorithmResultToString(result);
