@@ -19,7 +19,7 @@ class NameToTokenConverterTest {
     private final List<String> maleTokens = new ArrayList<>(Arrays.asList("Jan", "Andrzej", "Olaf"));
 
     @Test
-    void shouldSplitNameFromNamesWithNormalSpaces() {
+    void shouldReturnSplitNameForNamesWithNormalSpaces() {
         var name = "Jan Maria Olaf";
 
         var result = nameToTokenConverter
@@ -30,7 +30,7 @@ class NameToTokenConverterTest {
     }
 
     @Test
-    void shouldSplitNameFromNamesWithIrregularSpaces() {
+    void shouldReturnSplitNameForNamesWithIrregularSpaces() {
         var name = "Jan    Maria           Olaf";
 
         var result = nameToTokenConverter
@@ -41,7 +41,7 @@ class NameToTokenConverterTest {
     }
 
     @Test
-    void shouldSplitNameFromNameWithIrregularSpace() {
+    void shouldReturnSplitNameForNameWithIrregularSpace() {
         var name = "Jan       ";
 
         var result = nameToTokenConverter
@@ -52,7 +52,7 @@ class NameToTokenConverterTest {
     }
 
     @Test
-    void shouldRuntimeExceptionFromEmptyName() {
+    void shouldThrowRuntimeExceptionForEmptyName() {
         var name = "";
 
         assertThrows(RuntimeException.class, () ->
@@ -61,7 +61,7 @@ class NameToTokenConverterTest {
     }
 
     @Test
-    void shouldRuntimeExceptionFromSpaceName() {
+    void shouldThrowRuntimeExceptionForSpaceName() {
         var name = " ";
 
         assertThrows(RuntimeException.class, () ->
@@ -70,14 +70,14 @@ class NameToTokenConverterTest {
     }
 
     @Test
-    void shouldNullPointerExceptionFromNullName() {
+    void shouldThrowNullPointerExceptionForNullName() {
         assertThrows(NullPointerException.class, () ->
                 nameToTokenConverter.
                         splitToTokens(null, femaleTokens, maleTokens));
     }
 
     @Test
-    void shouldNullPointerExceptionFromNullFemaleTokens() {
+    void shouldThrowNullPointerExceptionForNullFemaleTokens() {
         var name = "Anna Zgidniew Gertruda";
 
         assertThrows(NullPointerException.class, () ->
@@ -86,7 +86,7 @@ class NameToTokenConverterTest {
     }
 
     @Test
-    void shouldNullPointerExceptionFromNullMaleTokens() {
+    void shouldThrowNullPointerExceptionForNullMaleTokens() {
         var name = "Anna Zgidniew Gertruda";
 
         assertThrows(NullPointerException.class, () ->
