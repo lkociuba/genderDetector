@@ -67,6 +67,70 @@ class GenderDetectionControllerTest {
     }
 
     @Test
+    void detectGender_spaceNameFirsToken_resultResponse404() {
+        String url = "http://localhost:" + port + "/gender/ /" + allTokens;
+
+        TestRestTemplate restTemplate = new TestRestTemplate();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        HttpEntity entity = new HttpEntity<String>(null, headers);
+
+        ResponseEntity<String> response = restTemplate.exchange(
+                url, HttpMethod.GET, entity, String.class);
+
+        assertEquals(404, response.getStatusCode().value());
+    }
+
+    @Test
+    void detectGender_emptyNameFirstToken_rresultResponse404() {
+        String url = "http://localhost:" + port + "/gender/" + "" + "/" + firstToken;
+
+        TestRestTemplate restTemplate = new TestRestTemplate();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        HttpEntity entity = new HttpEntity<String>(null, headers);
+
+        ResponseEntity<String> response = restTemplate.exchange(
+                url, HttpMethod.GET, entity, String.class);
+
+        assertEquals(404, response.getStatusCode().value());
+    }
+
+    @Test
+    void detectGender_name1AmptyAlgorithmType_resultResponse404() {
+        String url = "http://localhost:" + port + "/gender/" + name1 + "/" + "";
+
+        TestRestTemplate restTemplate = new TestRestTemplate();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        HttpEntity entity = new HttpEntity<String>(null, headers);
+
+        ResponseEntity<String> response = restTemplate.exchange(
+                url, HttpMethod.GET, entity, String.class);
+
+        assertEquals(404, response.getStatusCode().value());
+    }
+
+    @Test
+    void detectGender_name1SpaceAlgorithmType_resultExffceptions123() {
+        String url = "http://localhost:" + port + "/gender/" + name1 + "/" + " ";
+
+        TestRestTemplate restTemplate = new TestRestTemplate();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        HttpEntity entity = new HttpEntity<String>(null, headers);
+
+        ResponseEntity<String> response = restTemplate.exchange(
+                url, HttpMethod.GET, entity, String.class);
+
+        assertEquals(404, response.getStatusCode().value());
+    }
+
+    @Test
     void detectGender_name1AllTokens_resultInconclusive() {
         var response = this.testSetUp(name1, allTokens);
 
