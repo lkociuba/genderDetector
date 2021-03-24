@@ -1,5 +1,8 @@
 package com.lukaszkociuba.genderDetector.domain;
 
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class AlgorithmCheckVariablesAndTransformName {
@@ -12,9 +15,17 @@ public class AlgorithmCheckVariablesAndTransformName {
             throw new RuntimeException("Empty name given!");
         }
 
-        GenderDetectionAlgorithmNameToTokenConverter genderDetectionAlgorithmNameToTokenConverter = (name1 -> name1.split("\\s"));
-        var tokenedName = genderDetectionAlgorithmNameToTokenConverter.splitNameIntoTokens(name);
+        String[] splitName = Arrays.stream(name.split(" "))
+                .map(String::trim)
+                .toArray(String[]::new);
 
-        return tokenedName;
+        List<String> correctSplitName = new ArrayList<>();
+        for (String token : splitName) {
+            if (!token.equals("")) {
+                correctSplitName.add(token);
+            }
+        }
+
+        return correctSplitName.toArray(String[]::new);
     }
 }
