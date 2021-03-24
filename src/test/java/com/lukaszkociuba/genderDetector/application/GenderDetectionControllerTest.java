@@ -23,13 +23,10 @@ class GenderDetectionControllerTest {
     @LocalServerPort
     private int port;
 
-    private final String name1 = "Jan Maria Rokita";
-    private final String name2 = "Anna Zgidniew Gertruda";
-
     private final String firstToken = "firstToken";
     private final String allTokens = "allTokens";
 
-    private String testSetUp(String name, String algorithmType) {
+    private ResponseEntity<String> fetchGender(String name, String algorithmType) {
         String url = "http://localhost:" + port + "/gender/" + name + "/" + algorithmType;
 
         TestRestTemplate restTemplate = new TestRestTemplate();
@@ -38,117 +35,98 @@ class GenderDetectionControllerTest {
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         HttpEntity entity = new HttpEntity<String>(null, headers);
 
-        ResponseEntity<String> response = restTemplate.exchange(
-                url, HttpMethod.GET, entity, String.class);
-
-        return response.getBody();
+        return restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
     }
 
     @Test
-    void detectGender_name1FirstToken_resultMale() {
-        var response = this.testSetUp(name1, firstToken);
+    void shouldReturnFemaleGenderForFirstTokenAlgorithmNamesWithFirstFemaleName() {
+        var name = "Anna Zgidniew Gertruda";
 
-        assertThat(response, is("MALE"));
+        var response = this.fetchGender(name, firstToken);
+
+        assertThat(response.getBody(), is("FEMALE"));
     }
 
     @Test
-    void detectGender_name2FirstToken_resultFemale() {
-        var response = this.testSetUp(name2, firstToken);
+    void shouldReturnMaleGenderForFirstTokenAlgorithmNamesWithFirstMaleName() {
+        var name = "Jan Maria Rokita";
 
-        assertThat(response, is("FEMALE"));
+        var response = this.fetchGender(name, firstToken);
+
+        assertThat(response.getBody(), is("MALE"));
     }
 
     @Test
-    void detectGender_name3FirstToken_resultInconclusive() {
-        var name3 = "Krzysztof Bogusław";
-        var response = this.testSetUp(name3, firstToken);
+    void shouldReturnInconclusiveGenderForFirstTokenAlgorithmIncorrectNames() {
+        var name = "Krzysztof Julia";
 
-        assertThat(response, is("INCONCLUSIVE"));
+        var response = this.fetchGender(name, firstToken);
+
+        assertThat(response.getBody(), is("INCONCLUSIVE"));
     }
 
     @Test
-    void detectGender_spaceNameFirsToken_resultResponse404() {
-        String url = "http://localhost:" + port + "/gender/ /" + allTokens;
+    void shouldReturnFemaleGenderForAllTokensAlgorithmNamesWithFemaleMajority() {
+        var name = "Anna Zgidniew Gertruda";
 
-        TestRestTemplate restTemplate = new TestRestTemplate();
+        var response = this.fetchGender(name, allTokens);
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-        HttpEntity entity = new HttpEntity<String>(null, headers);
+        assertThat(response.getBody(), is("FEMALE"));
+    }
 
-        ResponseEntity<String> response = restTemplate.exchange(
-                url, HttpMethod.GET, entity, String.class);
+    @Test
+    void shouldReturnMaleGenderForForAllTokensAlgorithmNamesWithMaleMajority() {
+        var name = "Anna Olaf Jan";
+
+        var response = this.fetchGender(name, allTokens);
+
+        assertThat(response.getBody(), is("MALE"));
+    }
+
+    @Test
+    void shouldReturnInconclusiveGenderForAllTokensAlgorithmNamesWithEqualsMaleAndFemale() {
+        var name = "Anna Olaf Jan Maria";
+
+        var response = this.fetchGender(name, allTokens);
+
+        assertThat(response.getBody(), is("INCONCLUSIVE"));
+    }
+
+    @Test
+    void shouldReturnResponse404ForSpaceName() {
+        var name = " ";
+
+        var response = this.fetchGender(name, firstToken);
 
         assertEquals(404, response.getStatusCode().value());
     }
 
     @Test
-    void detectGender_emptyNameFirstToken_rresultResponse404() {
-        String url = "http://localhost:" + port + "/gender/" + "" + "/" + firstToken;
+    void shouldReturnResponse404ForEmptyName() {
+        var name = "";
 
-        TestRestTemplate restTemplate = new TestRestTemplate();
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-        HttpEntity entity = new HttpEntity<String>(null, headers);
-
-        ResponseEntity<String> response = restTemplate.exchange(
-                url, HttpMethod.GET, entity, String.class);
+        var response = this.fetchGender(name, firstToken);
 
         assertEquals(404, response.getStatusCode().value());
     }
 
     @Test
-    void detectGender_name1AmptyAlgorithmType_resultResponse404() {
-        String url = "http://localhost:" + port + "/gender/" + name1 + "/" + "";
+    void shouldReturnResponse404ForEmptyAlgorithmType() {
+        var name = "Anna Zgidniew Gertruda";
+        var algorithmType = "";
 
-        TestRestTemplate restTemplate = new TestRestTemplate();
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-        HttpEntity entity = new HttpEntity<String>(null, headers);
-
-        ResponseEntity<String> response = restTemplate.exchange(
-                url, HttpMethod.GET, entity, String.class);
+        var response = this.fetchGender(name, algorithmType);
 
         assertEquals(404, response.getStatusCode().value());
     }
 
     @Test
-    void detectGender_name1SpaceAlgorithmType_resultExffceptions123() {
-        String url = "http://localhost:" + port + "/gender/" + name1 + "/" + " ";
+    void shouldReturnResponse404ForSpaceAlgorithmType() {
+        var name = "Anna Zgidniew Gertruda";
+        var algorithmType = " ";
 
-        TestRestTemplate restTemplate = new TestRestTemplate();
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-        HttpEntity entity = new HttpEntity<String>(null, headers);
-
-        ResponseEntity<String> response = restTemplate.exchange(
-                url, HttpMethod.GET, entity, String.class);
+        var response = this.fetchGender(name, algorithmType);
 
         assertEquals(404, response.getStatusCode().value());
-    }
-
-    @Test
-    void detectGender_name1AllTokens_resultInconclusive() {
-        var response = this.testSetUp(name1, allTokens);
-
-        assertThat(response, is("INCONCLUSIVE"));
-    }
-
-    @Test
-    void detectGender_name2AllTokens_resultFemale() {
-        var response = this.testSetUp(name2, allTokens);
-
-        assertThat(response, is("FEMALE"));
-    }
-
-    @Test
-    void detectGender_name4AllTokens_resultMale() {
-        var name4 = "Anna Olaf Jan";
-        var response = this.testSetUp(name4, allTokens);
-
-        assertThat(response, is("MALE"));
     }
 }
