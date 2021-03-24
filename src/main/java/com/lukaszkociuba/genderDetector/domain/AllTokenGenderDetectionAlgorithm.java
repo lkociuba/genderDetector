@@ -7,17 +7,6 @@ public class AllTokenGenderDetectionAlgorithm implements GenderDetectionAlgorith
     private AlgorithmCheckVariablesAndTransformName algorithmCheckVariablesAndTransformName =
             new AlgorithmCheckVariablesAndTransformName();
 
-    private int countEqualTokens(String[] tokenedName, List<String> nameTokens) {
-        int equalTokens = 0;
-        for (var nameToken : tokenedName) {
-            for (var femaleToken : nameTokens) {
-                if (nameToken.equals(femaleToken)) {
-                    equalTokens += 1;
-                }
-            }
-        }
-        return equalTokens;
-    }
 
     @Override
     public GenderDetectionAlgorithmResult detectGender(String name, List<String> femaleTokens, List<String> maleTokens) {
@@ -34,5 +23,17 @@ public class AllTokenGenderDetectionAlgorithm implements GenderDetectionAlgorith
         } else {
             return GenderDetectionAlgorithmResult.INCONCLUSIVE;
         }
+    }
+
+    private int countEqualTokens(String[] tokenedName, List<String> nameTokens) {
+        int equalTokens = 0;
+        for (var nameToken : tokenedName) {
+            for (var femaleToken : nameTokens) {
+                if (nameToken.equals(femaleToken)) {
+                    equalTokens += 1;
+                }
+            }
+        }
+        return equalTokens;
     }
 }
