@@ -19,7 +19,7 @@ class FirstTokenGenderDetectionAlgorithmTest {
     private final List<String> maleTokens = new ArrayList<>(Arrays.asList("Jan", "Andrzej", "Olaf"));
 
     @Test
-    void shouldFemaleGenderFromFemaleName() {
+    void shouldReturnFemaleGenderForFemaleName() {
         var name = "Anna";
 
         var result = firstTokenGenderDetectionAlgorithm.detectGender(name, femaleTokens, maleTokens);
@@ -28,7 +28,7 @@ class FirstTokenGenderDetectionAlgorithmTest {
     }
 
     @Test
-    void shouldMaleGenderFromMaleName() {
+    void shouldReturnMaleGenderForMaleName() {
         var name = "Jan";
 
         var result = firstTokenGenderDetectionAlgorithm.detectGender(name, femaleTokens, maleTokens);
@@ -37,7 +37,7 @@ class FirstTokenGenderDetectionAlgorithmTest {
     }
 
     @Test
-    void shouldInconclusiveGenderFromIncorrectFemaleName() {
+    void shouldReturnInconclusiveGenderForIncorrectFemaleName() {
         var name = "Julia";
 
         var result = firstTokenGenderDetectionAlgorithm.detectGender(name, femaleTokens, maleTokens);
@@ -46,7 +46,7 @@ class FirstTokenGenderDetectionAlgorithmTest {
     }
 
     @Test
-    void shouldInconclusiveGenderFromIncorrectMaleName() {
+    void shouldReturnInconclusiveGenderForIncorrectMaleName() {
         var name = "Krzysztof";
 
         var result = firstTokenGenderDetectionAlgorithm.detectGender(name, femaleTokens, maleTokens);
@@ -55,7 +55,7 @@ class FirstTokenGenderDetectionAlgorithmTest {
     }
 
     @Test
-    void shouldFemaleGenderFromNamesWithFirstFemaleName() {
+    void shouldReturnFemaleGenderForNamesWithFirstFemaleName() {
         var name = "Anna Jan Olaf";
 
         var result = firstTokenGenderDetectionAlgorithm.detectGender(name, femaleTokens, maleTokens);
@@ -64,7 +64,7 @@ class FirstTokenGenderDetectionAlgorithmTest {
     }
 
     @Test
-    void shouldMaleGenderFromNamesWithFirstMaleName() {
+    void shouldReturnMaleGenderForNamesWithFirstMaleName() {
         var name = "Jan Anna Olaf";
 
         var result = firstTokenGenderDetectionAlgorithm.detectGender(name, femaleTokens, maleTokens);
@@ -73,7 +73,7 @@ class FirstTokenGenderDetectionAlgorithmTest {
     }
 
     @Test
-    void shouldInconclusiveGenderFromNamesWithFirstIncorrectFemaleName() {
+    void shouldReturnInconclusiveGenderForNamesWithFirstIncorrectFemaleName() {
         var name = "Julia Anna Olaf";
 
         var result = firstTokenGenderDetectionAlgorithm.detectGender(name, femaleTokens, maleTokens);
@@ -82,7 +82,7 @@ class FirstTokenGenderDetectionAlgorithmTest {
     }
 
     @Test
-    void shouldInconclusiveGenderFromNamesWithFirstIncorrectMaleName() {
+    void shouldReturnInconclusiveGenderForNamesWithFirstIncorrectMaleName() {
         var name = "Krzysztof Anna Olaf";
 
         var result = firstTokenGenderDetectionAlgorithm.detectGender(name, femaleTokens, maleTokens);
@@ -91,7 +91,7 @@ class FirstTokenGenderDetectionAlgorithmTest {
     }
 
     @Test
-    void shouldRuntimeExceptionFromEmptyName() {
+    void shouldThrowRuntimeExceptionForEmptyName() {
         var name = "";
 
         assertThrows(RuntimeException.class, () ->
@@ -99,7 +99,7 @@ class FirstTokenGenderDetectionAlgorithmTest {
     }
 
     @Test
-    void shouldRuntimeExceptionFromSpaceName() {
+    void shouldThrowRuntimeExceptionForSpaceName() {
         var name = " ";
 
         assertThrows(RuntimeException.class, () ->
@@ -108,13 +108,13 @@ class FirstTokenGenderDetectionAlgorithmTest {
 
 
     @Test
-    void shouldNullPointerExceptionFromNullName() {
+    void shouldThrowNullPointerExceptionForNullName() {
         assertThrows(NullPointerException.class, () ->
                 firstTokenGenderDetectionAlgorithm.detectGender(null, femaleTokens, maleTokens));
     }
 
     @Test
-    void shouldNullPointerExceptionFromNullFemaleTokens() {
+    void shouldThrowNullPointerExceptionForNullFemaleTokens() {
         var name = "Jan";
 
         assertThrows(NullPointerException.class, () ->
@@ -122,7 +122,7 @@ class FirstTokenGenderDetectionAlgorithmTest {
     }
 
     @Test
-    void shouldNullPointerExceptionFromNullMaleTokens() {
+    void shouldThrowNullPointerExceptionForNullMaleTokens() {
         var name = "Jan";
 
         assertThrows(NullPointerException.class, () ->
@@ -130,7 +130,7 @@ class FirstTokenGenderDetectionAlgorithmTest {
     }
 
     @Test
-    void shouldFemaleGenderFromNamesWithFirstFemaleNameAndIrregularSpaces() {
+    void shouldReturnFemaleGenderForNamesWithFirstFemaleNameAndIrregularSpaces() {
         var name = "Anna    Jan    Olaf";
 
         var result = firstTokenGenderDetectionAlgorithm.detectGender(name, femaleTokens, maleTokens);
@@ -139,7 +139,7 @@ class FirstTokenGenderDetectionAlgorithmTest {
     }
 
     @Test
-    void shouldMaleGenderFromNamesWithFirstMaleNameAndIrregularSpaces() {
+    void shouldReturnMaleGenderForNamesWithFirstMaleNameAndIrregularSpaces() {
         var name = "Jan    Anna     Olaf";
 
         var result = firstTokenGenderDetectionAlgorithm.detectGender(name, femaleTokens, maleTokens);
@@ -148,7 +148,7 @@ class FirstTokenGenderDetectionAlgorithmTest {
     }
 
     @Test
-    void shouldInconclusiveGenderFromNamesWithFirstIncorrectFemaleNameAndIrregularSpaces() {
+    void shouldReturnInconclusiveGenderForNamesWithFirstIncorrectFemaleNameAndIrregularSpaces() {
         var name = "Julia    Anna    Olaf";
 
         var result = firstTokenGenderDetectionAlgorithm.detectGender(name, femaleTokens, maleTokens);
@@ -157,7 +157,7 @@ class FirstTokenGenderDetectionAlgorithmTest {
     }
 
     @Test
-    void shouldInconclusiveGenderFromNamesWithFirstIncorrectMaleNameAndIrregularSpaces() {
+    void shouldReturnInconclusiveGenderForNamesWithFirstIncorrectMaleNameAndIrregularSpaces() {
         var name = "Krzysztof Anna      Olaf";
 
         var result = firstTokenGenderDetectionAlgorithm.detectGender(name, femaleTokens, maleTokens);
