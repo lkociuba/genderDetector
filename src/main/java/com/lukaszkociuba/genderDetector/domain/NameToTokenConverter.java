@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class AlgorithmCheckVariablesAndTransformName {
-    public String[] checkVariablesAndTransformName(String name, List<String> femaleTokens, List<String> maleTokens) {
+public class NameToTokenConverter {
+    public String[] splitToTokens(String name, List<String> femaleTokens, List<String> maleTokens) {
         if (name == null || femaleTokens == null || maleTokens == null) {
             throw new NullPointerException("Null value given!");
         }

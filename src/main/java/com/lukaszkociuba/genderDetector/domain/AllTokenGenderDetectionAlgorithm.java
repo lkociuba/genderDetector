@@ -4,14 +4,14 @@ import java.util.List;
 
 public class AllTokenGenderDetectionAlgorithm implements GenderDetectionAlgorithm {
 
-    private AlgorithmCheckVariablesAndTransformName algorithmCheckVariablesAndTransformName =
-            new AlgorithmCheckVariablesAndTransformName();
+    private NameToTokenConverter nameToTokenConverter =
+            new NameToTokenConverter();
 
 
     @Override
     public GenderDetectionAlgorithmResult detectGender(String name, List<String> femaleTokens, List<String> maleTokens) {
-        var tokenedName = algorithmCheckVariablesAndTransformName
-                .checkVariablesAndTransformName(name, femaleTokens, maleTokens);
+        var tokenedName = nameToTokenConverter
+                .splitToTokens(name, femaleTokens, maleTokens);
 
         int countFemaleTokens = countEqualTokens(tokenedName, femaleTokens);
         int countMaleTokens = countEqualTokens(tokenedName, maleTokens);

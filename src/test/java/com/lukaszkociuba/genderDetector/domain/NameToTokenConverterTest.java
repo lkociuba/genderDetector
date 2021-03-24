@@ -10,10 +10,10 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
-class AlgorithmCheckVariablesAndTransformNameTest {
+class NameToTokenConverterTest {
 
-    private AlgorithmCheckVariablesAndTransformName algorithmCheckVariablesAndTransformName =
-            new AlgorithmCheckVariablesAndTransformName();
+    private NameToTokenConverter nameToTokenConverter =
+            new NameToTokenConverter();
 
     private final List<String> femaleTokens = new ArrayList<>(Arrays.asList("Maria", "Anna", "Gertruda"));
     private final List<String> maleTokens = new ArrayList<>(Arrays.asList("Jan", "Andrzej", "Olaf"));
@@ -22,8 +22,8 @@ class AlgorithmCheckVariablesAndTransformNameTest {
     void shouldSplitNameFromNamesWithNormalSpaces() {
         var name = "Jan Maria Olaf";
 
-        var result = algorithmCheckVariablesAndTransformName
-                .checkVariablesAndTransformName(name, femaleTokens, maleTokens);
+        var result = nameToTokenConverter
+                .splitToTokens(name, femaleTokens, maleTokens);
 
         String[] expected = {"Jan", "Maria", "Olaf"};
         assertThat(result, is(expected));
@@ -33,8 +33,8 @@ class AlgorithmCheckVariablesAndTransformNameTest {
     void shouldSplitNameFromNamesWithIrregularSpaces() {
         var name = "Jan    Maria           Olaf";
 
-        var result = algorithmCheckVariablesAndTransformName
-                .checkVariablesAndTransformName(name, femaleTokens, maleTokens);
+        var result = nameToTokenConverter
+                .splitToTokens(name, femaleTokens, maleTokens);
 
         String[] expected = {"Jan", "Maria", "Olaf"};
         assertThat(result, is(expected));
@@ -44,8 +44,8 @@ class AlgorithmCheckVariablesAndTransformNameTest {
     void shouldSplitNameFromNameWithIrregularSpace() {
         var name = "Jan       ";
 
-        var result = algorithmCheckVariablesAndTransformName
-                .checkVariablesAndTransformName(name, femaleTokens, maleTokens);
+        var result = nameToTokenConverter
+                .splitToTokens(name, femaleTokens, maleTokens);
 
         String[] expected = {"Jan"};
         assertThat(result, is(expected));
@@ -56,8 +56,8 @@ class AlgorithmCheckVariablesAndTransformNameTest {
         var name = "";
 
         assertThrows(RuntimeException.class, () ->
-                algorithmCheckVariablesAndTransformName.
-                        checkVariablesAndTransformName(name, femaleTokens, maleTokens));
+                nameToTokenConverter.
+                        splitToTokens(name, femaleTokens, maleTokens));
     }
 
     @Test
@@ -65,15 +65,15 @@ class AlgorithmCheckVariablesAndTransformNameTest {
         var name = " ";
 
         assertThrows(RuntimeException.class, () ->
-                algorithmCheckVariablesAndTransformName.
-                        checkVariablesAndTransformName(name, femaleTokens, maleTokens));
+                nameToTokenConverter.
+                        splitToTokens(name, femaleTokens, maleTokens));
     }
 
     @Test
     void shouldNullPointerExceptionFromNullName() {
         assertThrows(NullPointerException.class, () ->
-                algorithmCheckVariablesAndTransformName.
-                        checkVariablesAndTransformName(null, femaleTokens, maleTokens));
+                nameToTokenConverter.
+                        splitToTokens(null, femaleTokens, maleTokens));
     }
 
     @Test
@@ -81,8 +81,8 @@ class AlgorithmCheckVariablesAndTransformNameTest {
         var name = "Anna Zgidniew Gertruda";
 
         assertThrows(NullPointerException.class, () ->
-                algorithmCheckVariablesAndTransformName.
-                        checkVariablesAndTransformName(name, null, maleTokens));
+                nameToTokenConverter.
+                        splitToTokens(name, null, maleTokens));
     }
 
     @Test
@@ -90,8 +90,8 @@ class AlgorithmCheckVariablesAndTransformNameTest {
         var name = "Anna Zgidniew Gertruda";
 
         assertThrows(NullPointerException.class, () ->
-                algorithmCheckVariablesAndTransformName.
-                        checkVariablesAndTransformName(name, femaleTokens, null));
+                nameToTokenConverter.
+                        splitToTokens(name, femaleTokens, null));
     }
 
 }
