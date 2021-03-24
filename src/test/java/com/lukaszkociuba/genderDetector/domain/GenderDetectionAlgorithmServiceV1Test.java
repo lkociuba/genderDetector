@@ -30,7 +30,7 @@ class GenderDetectionAlgorithmServiceV1Test {
     }
 
     @Test
-    void shouldReturnExceptionForWrongAlgorithmType() {
+    void shouldThrowExceptionForWrongAlgorithmType() {
         var algorithmType = "wrongType";
 
         assertThrows(Exception.class, () ->
@@ -38,7 +38,7 @@ class GenderDetectionAlgorithmServiceV1Test {
     }
 
     @Test
-    void shouldReturnExceptionForEmptyAlgorithmType() {
+    void shouldThrowExceptionForEmptyAlgorithmType() {
         var algorithmType = "";
 
         assertThrows(Exception.class, () ->
@@ -46,7 +46,7 @@ class GenderDetectionAlgorithmServiceV1Test {
     }
 
     @Test
-    void shouldReturnExceptionForSpaceAlgorithmType() {
+    void shouldThrowExceptionForSpaceAlgorithmType() {
         var algorithmType = "";
 
         assertThrows(Exception.class, () ->
@@ -54,7 +54,7 @@ class GenderDetectionAlgorithmServiceV1Test {
     }
 
     @Test
-    void shouldReturnExceptionForNullAlgorithmType() {
+    void shouldThrowExceptionForNullAlgorithmType() {
         assertThrows(Exception.class, () ->
                 genderDetectionAlgorithmService.detectGender(name1, null));
     }
