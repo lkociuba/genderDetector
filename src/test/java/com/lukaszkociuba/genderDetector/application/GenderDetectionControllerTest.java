@@ -27,7 +27,7 @@ class GenderDetectionControllerTest {
     private final String allTokens = "allTokens";
 
     private ResponseEntity<String> fetchGender(String name, String algorithmType) {
-        String url = "http://localhost:" + port + "/gender/" + name + "/" + algorithmType;
+        String url = "http://localhost:" + port + "/gender?name=" + name + "&algorithmType=" + algorithmType;
 
         TestRestTemplate restTemplate = new TestRestTemplate();
 
@@ -93,40 +93,40 @@ class GenderDetectionControllerTest {
     }
 
     @Test
-    void shouldReturnResponse404ForSpaceName() {
+    void shouldReturnBadRequestForSpaceName() {
         var name = " ";
 
         var response = this.fetchGender(name, firstToken);
 
-        assertEquals(404, response.getStatusCode().value());
+        assertEquals(400, response.getStatusCode().value());
     }
 
     @Test
-    void shouldReturnResponse404ForEmptyName() {
+    void shouldReturnBadRequestForEmptyName() {
         var name = "";
 
         var response = this.fetchGender(name, firstToken);
 
-        assertEquals(404, response.getStatusCode().value());
+        assertEquals(400, response.getStatusCode().value());
     }
 
     @Test
-    void shouldReturnResponse404ForEmptyAlgorithmType() {
+    void shouldReturnBadRequestForEmptyAlgorithmType() {
         var name = "Anna Zgidniew Gertruda";
         var algorithmType = "";
 
         var response = this.fetchGender(name, algorithmType);
 
-        assertEquals(404, response.getStatusCode().value());
+        assertEquals(400, response.getStatusCode().value());
     }
 
     @Test
-    void shouldReturnResponse404ForSpaceAlgorithmType() {
+    void shouldReturnBadRequestForSpaceAlgorithmType() {
         var name = "Anna Zgidniew Gertruda";
         var algorithmType = " ";
 
         var response = this.fetchGender(name, algorithmType);
 
-        assertEquals(404, response.getStatusCode().value());
+        assertEquals(400, response.getStatusCode().value());
     }
 }
