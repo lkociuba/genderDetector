@@ -1,4 +1,4 @@
-package com.lukaszkociuba.genderDetector.domain;
+package com.lukaszkociuba.genderDetector.domain.model;
 
 public interface GenderDetectionAlgorithmService {
 

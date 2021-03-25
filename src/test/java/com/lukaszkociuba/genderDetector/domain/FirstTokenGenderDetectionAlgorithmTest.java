@@ -1,5 +1,7 @@
 package com.lukaszkociuba.genderDetector.domain;
 
+import com.lukaszkociuba.genderDetector.domain.model.FirstTokenGenderDetectionAlgorithm;
+import com.lukaszkociuba.genderDetector.domain.model.GenderDetectionAlgorithmResult;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

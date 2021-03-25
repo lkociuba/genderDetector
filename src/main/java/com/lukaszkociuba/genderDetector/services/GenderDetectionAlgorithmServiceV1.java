@@ -1,6 +1,10 @@
 package com.lukaszkociuba.genderDetector.services;
 
-import com.lukaszkociuba.genderDetector.domain.*;
+import com.lukaszkociuba.genderDetector.domain.model.GenderDetectionAlgorithmFactory;
+import com.lukaszkociuba.genderDetector.domain.model.GenderDetectionAlgorithmResult;
+import com.lukaszkociuba.genderDetector.domain.model.GenderDetectionAlgorithmService;
+import com.lukaszkociuba.genderDetector.domain.model.GenderDetectionAlgorithmType;
+import com.lukaszkociuba.genderDetector.domain.port.GenderDetectionAlgorithm;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

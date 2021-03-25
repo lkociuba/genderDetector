@@ -1,5 +1,6 @@
 package com.lukaszkociuba.genderDetector.domain;
 
+import com.lukaszkociuba.genderDetector.domain.model.NameToTokenConverter;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

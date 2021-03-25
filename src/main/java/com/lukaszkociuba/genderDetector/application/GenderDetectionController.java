@@ -1,7 +1,6 @@
 package com.lukaszkociuba.genderDetector.application;
 
-import com.lukaszkociuba.genderDetector.domain.GenderDetectionAlgorithmService;
-import com.lukaszkociuba.genderDetector.services.GenderDetectionAlgorithmServiceV1;
+import com.lukaszkociuba.genderDetector.domain.model.GenderDetectionAlgorithmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;

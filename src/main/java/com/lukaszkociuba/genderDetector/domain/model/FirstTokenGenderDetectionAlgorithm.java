@@ -1,4 +1,6 @@
-package com.lukaszkociuba.genderDetector.domain;
+package com.lukaszkociuba.genderDetector.domain.model;
+
+import com.lukaszkociuba.genderDetector.domain.port.GenderDetectionAlgorithm;
 
 import java.util.List;
 
