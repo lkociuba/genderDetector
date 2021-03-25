@@ -5,17 +5,12 @@ import com.lukaszkociuba.genderDetector.domain.model.GenderDetectionAlgorithmRes
 import com.lukaszkociuba.genderDetector.domain.model.GenderDetectionAlgorithmService;
 import com.lukaszkociuba.genderDetector.domain.model.GenderDetectionAlgorithmType;
 import com.lukaszkociuba.genderDetector.domain.port.GenderDetectionAlgorithm;
+import com.lukaszkociuba.genderDetector.domain.port.GenderTokensSource;
+import com.lukaszkociuba.genderDetector.infrastructure.GenderTokensSourceAdapter;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 @Service
 public class GenderDetectionAlgorithmServiceV1 implements GenderDetectionAlgorithmService {
-
-    private final List<String> maleTokens = new ArrayList<>(Arrays.asList("Jan", "Andrzej", "Olaf"));
-    private final List<String> femaleTokes = new ArrayList<>(Arrays.asList("Maria", "Anna", "Gertruda"));
 
     @Override
     public String detectGender(String name, String algorithmType) throws Exception {
@@ -24,7 +19,10 @@ public class GenderDetectionAlgorithmServiceV1 implements GenderDetectionAlgorit
         GenderDetectionAlgorithmFactory genderDetectionAlgorithmFactory = new GenderDetectionAlgorithmFactory();
         GenderDetectionAlgorithm algorithm = genderDetectionAlgorithmFactory.getGenderDetectionAlgorithm(givenAlgorithmType);
 
-        var result = algorithm.detectGender(name, femaleTokes, maleTokens);
+        GenderTokensSource maleTokens = new GenderTokensSourceAdapter("maleTokens");
+        GenderTokensSource femaleTokes = new GenderTokensSourceAdapter("femaleTokens");
+
+        var result = algorithm.detectGender(name, femaleTokes.getTokenList(), maleTokens.getTokenList());
         return this.convertAlgorithmResultToString(result);
     }
 
