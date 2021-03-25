@@ -1,5 +1,6 @@
 package com.lukaszkociuba.genderDetector.domain;
 
+import com.lukaszkociuba.genderDetector.services.GenderDetectionAlgorithmServiceV1;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.CoreMatchers.is;
