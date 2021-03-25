@@ -12,25 +12,25 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GenderTokensSourceAdapterTest {
 
-    private GenderTokensSourceAdapter genderTokensSourceAdapter = new GenderTokensSourceAdapter();
-
     private final List<String> maleTokens = new ArrayList<>(Arrays.asList("Jan", "Andrzej", "Olaf"));
     private final List<String> femaleTokens = new ArrayList<>(Arrays.asList("Maria", "Anna", "Gertruda"));
 
     @Test
-    void shouldReturnFemaleTokenListForFemaleAlgorithmType() {
+    void shouldReturnFemaleTokenListForFemaleTokenList() {
         var tokenList = "femaleTokens";
+        var genderTokensSourceAdapter = new GenderTokensSourceAdapter(tokenList);
 
-        var result = genderTokensSourceAdapter.getTokenList(tokenList);
+        var result = genderTokensSourceAdapter.getTokenList();
 
         assertThat(result, is(femaleTokens));
     }
 
     @Test
-    void shouldReturnMaleTokenListForMaleAlgorithmType() {
+    void shouldReturnMaleTokenListForMaleTokenList() {
         var tokenList = "maleTokens";
+        var genderTokensSourceAdapter = new GenderTokensSourceAdapter(tokenList);
 
-        var result = genderTokensSourceAdapter.getTokenList(tokenList);
+        var result = genderTokensSourceAdapter.getTokenList();
 
         assertThat(result, is(maleTokens));
     }
@@ -40,7 +40,7 @@ class GenderTokensSourceAdapterTest {
         String tokenList = null;
 
         assertThrows(NullPointerException.class, () ->
-                genderTokensSourceAdapter.getTokenList(tokenList));
+                new GenderTokensSourceAdapter(tokenList));
     }
 
     @Test
@@ -48,7 +48,7 @@ class GenderTokensSourceAdapterTest {
         var tokenList = "";
 
         assertThrows(Exception.class, () ->
-                genderTokensSourceAdapter.getTokenList(tokenList));
+                new GenderTokensSourceAdapter(tokenList));
     }
 
     @Test
@@ -56,23 +56,6 @@ class GenderTokensSourceAdapterTest {
         var tokenList = " ";
 
         assertThrows(Exception.class, () ->
-                genderTokensSourceAdapter.getTokenList(tokenList));
+                new GenderTokensSourceAdapter(tokenList));
     }
-
-    @Test
-    void shouldThrowExceptionForIncorrectFemaleAlgorithmType() {
-        var tokenList = "female Tokens";
-
-        assertThrows(Exception.class, () ->
-                genderTokensSourceAdapter.getTokenList(tokenList));
-    }
-
-    @Test
-    void shouldThrowExceptionForIncorrectMaleAlgorithmType() {
-        var tokenList = "male Token";
-
-        assertThrows(Exception.class, () ->
-                genderTokensSourceAdapter.getTokenList(tokenList));
-    }
-
 }
