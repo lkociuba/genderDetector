@@ -4,12 +4,12 @@
 - 💞️ I’m looking to collaborate on simple projects to improve my coding skills
 - 📫 How to reach me - kociubalukasz@gmail.com
 
-# genderDetection
+# Gender Detection
 
 ## Table of contents
 * [General info](#general-info)
 * [Technologies](#technologies)
-* [Setup](#setup)
+* [Implemented functions](#implemented-functions)
 
 ## General info
 This is a simple guess gender detection project.
@@ -21,7 +21,7 @@ Project is created with:
 * Spring Boot version: 2.4.4
 This is a simple guess gender detection project.
 
-## Implemented functions:
+## Implemented functions
 1. Guess gender by first token of given name.
 2. Guess gender by all tokens of given name use majority rule.
 3. Endpoint to guess gender detection
