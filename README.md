@@ -10,13 +10,13 @@ This is a simple guess gender detection project.
 Implemented functions:
 
 1. Guess gender by first token of given name.
-2. Guess gender by all tokens of given name use majority role.
+2. Guess gender by all tokens of given name use majority rule.
 3. Endpoint to guess gender detection
  -   http://localhost:8080/gender?name=Jan&algorithmType=firstToken
- -   http://localhost:8080/gender?name=Maria Gertruda Olaf&algorithmType=allTokens
+ -   http://localhost:8080/gender?name=Maria%20Gertruda%20Olaf&algorithmType=allTokens
 4. Endpoint to male & felmale token lists.
- -    http://localhost:8080//genderList?tokenListName=maleTokens
- -    http://localhost:8080//genderList?tokenListName=femaleTokens
+ -    http://localhost:8080/genderList?tokenListName=maleTokens
+ -    http://localhost:8080/genderList?tokenListName=femaleTokens
 
 5. Female Token List:
  -   ("Maria", "Anna", "Gertruda")
