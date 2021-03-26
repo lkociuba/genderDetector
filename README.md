@@ -15,8 +15,8 @@ Implemented functions:
  -   http://localhost:8080/gender?name=Jan&algorithmType=firstToken
  -   http://localhost:8080/gender?name=Maria Gertruda Olaf&algorithmType=allTokens
 4. Endpoint to male & felmale token lists.
-  http://localhost:8080//genderList?tokenListName=maleTokens
-  http://localhost:8080//genderList?tokenListName=femaleTokens
+ -    http://localhost:8080//genderList?tokenListName=maleTokens
+ -    http://localhost:8080//genderList?tokenListName=femaleTokens
 
 Female Token List:
  -   ("Maria", "Anna", "Gertruda")
