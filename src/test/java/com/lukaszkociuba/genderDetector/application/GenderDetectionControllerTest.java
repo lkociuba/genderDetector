@@ -38,6 +38,18 @@ class GenderDetectionControllerTest {
         return restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
     }
 
+    private ResponseEntity<String> fetchTokenList(String tokenListName) {
+        String url = "http://localhost:" + port + "/genderList?tokenListName=" + tokenListName;
+
+        TestRestTemplate restTemplate = new TestRestTemplate();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        HttpEntity entity = new HttpEntity<String>(null, headers);
+
+        return restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
+    }
+
     @Test
     void shouldReturnFemaleGenderForFirstTokenAlgorithmNamesWithFirstFemaleName() {
         var name = "Anna Zgidniew Gertruda";
@@ -128,5 +140,32 @@ class GenderDetectionControllerTest {
         var response = this.fetchGender(name, algorithmType);
 
         assertEquals(400, response.getStatusCode().value());
+    }
+
+    @Test
+    void shouldReturnFemaleListForFemaleTokenListName() {
+        var tokenListName = "femaleTokens";
+
+        var response = this.fetchTokenList(tokenListName);
+
+        assertThat(response.getBody(), is("[\"Maria\",\"Anna\",\"Gertruda\"]"));
+    }
+
+    @Test
+    void shouldReturnMaleListForMaleTokenListName() {
+        var tokenListName = "maleTokens";
+
+        var response = this.fetchTokenList(tokenListName);
+
+        assertThat(response.getBody(), is("[\"Jan\",\"Andrzej\",\"Olaf\"]"));
+    }
+
+    @Test
+    void shouldReturnNullForNullTokenListName() {
+        String tokenListName = null;
+
+        var response = this.fetchTokenList(tokenListName);
+
+        System.out.println(response.getBody());
     }
 }
