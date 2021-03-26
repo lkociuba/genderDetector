@@ -18,7 +18,7 @@ Implemented functions:
  -    http://localhost:8080//genderList?tokenListName=maleTokens
  -    http://localhost:8080//genderList?tokenListName=femaleTokens
 
-Female Token List:
+5. Female Token List:
  -   ("Maria", "Anna", "Gertruda")
-Male Token List:
+6. Male Token List:
  -   ("Jan", "Andrzej", "Olaf")
