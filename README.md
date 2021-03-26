@@ -19,7 +19,6 @@ Project is created with:
 * Java version: 11
 * Maven
 * Spring Boot version: 2.4.4
-This is a simple guess gender detection project.
 
 ## Implemented functions
 1. Guess gender by first token of given name.
