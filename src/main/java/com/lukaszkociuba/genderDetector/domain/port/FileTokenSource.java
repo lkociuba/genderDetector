@@ -2,6 +2,6 @@ package com.lukaszkociuba.genderDetector.domain.port;
 
 import java.util.stream.Stream;
 
-public interface TokenSource {
+public interface FileTokenSource {
     Stream<String> stream();
 }
