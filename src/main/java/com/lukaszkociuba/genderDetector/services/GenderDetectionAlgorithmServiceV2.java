@@ -3,15 +3,16 @@ package com.lukaszkociuba.genderDetector.services;
 import com.lukaszkociuba.genderDetector.domain.model.GenderDetectionAlgorithmFactory;
 import com.lukaszkociuba.genderDetector.domain.model.GenderDetectionAlgorithmResult;
 import com.lukaszkociuba.genderDetector.domain.model.GenderDetectionAlgorithmType;
+import com.lukaszkociuba.genderDetector.domain.port.FileTokenSource;
 import com.lukaszkociuba.genderDetector.domain.port.GenderDetectionAlgorithm;
 import com.lukaszkociuba.genderDetector.domain.port.GenderTokensSource;
+import com.lukaszkociuba.genderDetector.infrastructure.FileTokenSourceAdapter;
 import com.lukaszkociuba.genderDetector.infrastructure.GenderTokensSourceAdapter;
 
 public class GenderDetectionAlgorithmServiceV2 implements GenderDetectionAlgorithmService {
 
-
-    private GenderTokensSource maleTokensSource = new GenderTokensSourceAdapter("maleTokens");
-    private GenderTokensSource femaleTokensSource = new GenderTokensSourceAdapter("femaleTokens");
+    private FileTokenSource maleTokensSource = new FileTokenSourceAdapter("maleTokens");
+    private FileTokenSource femaleTokensSource = new FileTokenSourceAdapter("femaleTokens");
 
     @Override
     public String detectGender(String name, String algorithmType) throws Exception {

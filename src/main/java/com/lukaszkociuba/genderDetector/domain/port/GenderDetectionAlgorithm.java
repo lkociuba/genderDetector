@@ -6,5 +6,5 @@ import java.util.stream.Stream;
 
 public interface GenderDetectionAlgorithm {
 
-    GenderDetectionAlgorithmResult detectGender(String name, GenderTokensSource femaleTokens, GenderTokensSource maleTokens);
+    GenderDetectionAlgorithmResult detectGender(String name, FileTokenSource femaleTokens, FileTokenSource maleTokens);
 }
