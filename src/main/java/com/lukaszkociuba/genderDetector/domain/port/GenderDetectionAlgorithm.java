@@ -2,9 +2,9 @@ package com.lukaszkociuba.genderDetector.domain.port;
 
 import com.lukaszkociuba.genderDetector.domain.model.GenderDetectionAlgorithmResult;
 
-import java.util.List;
+import java.util.stream.Stream;
 
 public interface GenderDetectionAlgorithm {
 
-    GenderDetectionAlgorithmResult detectGender(String name, List<String> femaleTokens, List<String> maleTokens);
+    GenderDetectionAlgorithmResult detectGender(String name, GenderTokensSource femaleTokens, GenderTokensSource maleTokens);
 }
